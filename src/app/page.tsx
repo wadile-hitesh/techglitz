@@ -4,11 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import QRCode from "qrcode";
-import techglitz from "@/assets/techglitzqr.png";
 
 export default function Home() {
   const [url,setUrl] = useState<string>("");
-  const [generatedQR,setGeneratedQR] = useState<string>("");
+  const [generatedQR, setGeneratedQR] = useState<string>(
+    "https://res.cloudinary.com/drouz97w8/image/upload/v1711271712/e9fpwopbytayrslhw9j4.png"
+  );
   const generateQR = async (url:string) => {
     try {
       const response = await QRCode.toDataURL(url);
@@ -34,7 +35,13 @@ export default function Home() {
         <Button onClick={() => generateQR(url)}>Generate</Button>
       </div>
       <div>
-        <Image src={generatedQR || techglitz} alt="QR Code" width={300} height={300} />
+        <Image
+          src={generatedQR}
+          priority
+          alt="QR Code"
+          width={300}
+          height={300}
+        />
       </div>
     </div>
   );
