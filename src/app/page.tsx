@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import QRCode from "qrcode";
+import techglitz from "@/assets/techglitzqr.png";
 
 export default function Home() {
   const [url,setUrl] = useState<string>("");
@@ -33,7 +34,7 @@ export default function Home() {
         <Button onClick={() => generateQR(url)}>Generate</Button>
       </div>
       <div>
-        <Image src={generatedQR} alt="QR Code" width={300} height={300} />
+        <Image src={generatedQR || techglitz} alt="QR Code" width={300} height={300} />
       </div>
     </div>
   );
