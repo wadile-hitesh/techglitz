@@ -12,9 +12,28 @@ export default function Home() {
   );
   const generateQR = async (url:string) => {
     try {
-      const response = await QRCode.toDataURL(url);
-      if(response) setGeneratedQR(response);
-      console.log(response);
+      let options = {
+        errorCorrectionLevel: "H",
+        version : 2,
+        type: "image/jpeg",
+        quality: 1,
+        margin: 2,
+        scale : 100,
+        color: {
+          dark: "#000000FF",
+          light: "#FFFFFFFF",
+        },
+      };
+      QRCode.toDataURL(
+        "Some Text",
+        options as QRCode.QRCodeOptions,
+        function (err, url) {
+          setGeneratedQR(url);
+          console.log(url);
+        }
+      );
+      // if(!response) throw new Error("Error in generating QR Code");
+      // console.log(response);
     } catch (err) {
       console.error(err);
     }
