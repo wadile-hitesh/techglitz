@@ -4,11 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import QRCode from "qrcode";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import GenerateQR from "@/components/GenerateQR/GenerateQR";
 
 export default function Home() {
   const [url,setUrl] = useState<string>("");
   const [generatedQR, setGeneratedQR] = useState<string>(
-    "https://res.cloudinary.com/drouz97w8/image/upload/v1711271712/e9fpwopbytayrslhw9j4.png"
+    "https://res.cloudinary.com/drouz97w8/image/upload/v1711883328/oluyrjhsf7jjcadl3vlr.jpg"
   );
   const generateQR = async (url:string) => {
     try {
@@ -40,28 +43,33 @@ export default function Home() {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="m-10">
-        <Input
-          className="w-96"
-          type="text"
-          placeholder="Enter your Url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-      </div>
-      <div>
-        <Button onClick={() => generateQR(url)}>Generate</Button>
-      </div>
-      <div>
-        <Image
-          src={generatedQR}
-          priority
-          alt="QR Code"
-          width={300}
-          height={300}
-        />
-      </div>
+    <div>
+      <Header />
+      <GenerateQR />
+        <div className="flex justify-center items-center">
+          <div className="m-10">
+            <Input
+              className="w-96"
+              type="text"
+              placeholder="Enter your Url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+            />
+          </div>
+          <div>
+            <Button onClick={() => generateQR(url)}>Generate</Button>
+          </div>
+          <div>
+            <Image
+              src={generatedQR}
+              priority
+              alt="QR Code"
+              width={300}
+              height={300}
+            />
+          </div>
+        </div>
+        <Footer />
     </div>
   );
 }
